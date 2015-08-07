@@ -406,13 +406,13 @@ public:
         char buf[32];
         memset(&buf[0], 0, 32);
 
-        SQLGetInfo(dbc, SQL_SERVER_NAME, buf,
+        SQLGetInfo(dbc, SQL_DBMS_NAME, buf, /* SQL_DBMS_NAME will return like MySQL, Oracle, etc */
                    sizeof(buf) - 1 /* leave a byte for null-termination */,
                    &len);
         srvInterface.log("ODBC Loader: Connecting to server of type '%s'", buf);
 
         std::string db_type(buf, len);
-        if (db_type == "ORCL") {
+        if (db_type == "Oracle") {
             quirks = Oracle;
         }
     }
